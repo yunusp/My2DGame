@@ -60,8 +60,7 @@ public class Player extends Entity {
 
     public void update() {
 
-        if (keyH.upPressed || keyH.downPressed
-                || keyH.leftPressed || keyH.rightPressed) {
+        if (keyH.upPressed || keyH.downPressed || keyH.leftPressed || keyH.rightPressed) {
             if (keyH.upPressed) direction = "up";
             else if (keyH.downPressed) direction = "down";
             else if (keyH.leftPressed) direction = "left";
@@ -112,7 +111,9 @@ public class Player extends Entity {
                     }
                     break;
                 case "Boots":
-                    speed += 2;
+                    if (speed < 7) {
+                        speed += 2;
+                    }
                     gp.obj[i] = null;
                     break;
                 default:
@@ -126,28 +127,20 @@ public class Player extends Entity {
 
         switch (direction) {
             case "up" -> {
-                if (spriteNum == 1)
-                    image = up1;
-                if (spriteNum == 2)
-                    image = up2;
+                if (spriteNum == 1) image = up1;
+                if (spriteNum == 2) image = up2;
             }
             case "down" -> {
-                if (spriteNum == 1)
-                    image = down1;
-                if (spriteNum == 2)
-                    image = down2;
+                if (spriteNum == 1) image = down1;
+                if (spriteNum == 2) image = down2;
             }
             case "right" -> {
-                if (spriteNum == 1)
-                    image = right1;
-                if (spriteNum == 2)
-                    image = right2;
+                if (spriteNum == 1) image = right1;
+                if (spriteNum == 2) image = right2;
             }
             case "left" -> {
-                if (spriteNum == 1)
-                    image = left1;
-                if (spriteNum == 2)
-                    image = left2;
+                if (spriteNum == 1) image = left1;
+                if (spriteNum == 2) image = left2;
             }
         }
         //move the world around the player, so the player doesn't move
