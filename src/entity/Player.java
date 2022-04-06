@@ -13,7 +13,7 @@ public class Player extends Entity {
     GamePanel gp;
     KeyHandler keyH;
 
-    int hasKey = 0;
+    public int hasKey = 0;
 
     public final int screenX;
     public final int screenY;
@@ -102,22 +102,28 @@ public class Player extends Entity {
                     hasKey++;
                     gp.playSE(1);
                     gp.obj[i] = null;
-                    System.out.println("Keys: " + hasKey);
+                    gp.ui.showMessage("You got a key");
                     break;
                 case "Door":
                     if (hasKey > 0) {
                         gp.obj[i] = null;
                         gp.playSE(3);
                         hasKey--;
-                        System.out.println("Keys: " + hasKey);
+                        gp.ui.showMessage("You opened a door");
+                    }else {
+                        gp.ui.showMessage("You need a key");
                     }
                     break;
                 case "Boots":
                     if (speed < 7) {
                         gp.playSE(2);
                         speed += 2;
+                        gp.ui.showMessage("Speed Up");
                     }
                     gp.obj[i] = null;
+                    break;
+                case "Chest":
+
                     break;
                 default:
                     throw new IllegalStateException("Unexpected value: " + objectName);
