@@ -111,6 +111,12 @@ public class Player extends Entity {
                         System.out.println("Keys: " + hasKey);
                     }
                     break;
+                case "Boots":
+                    speed += 2;
+                    gp.obj[i] = null;
+                    break;
+                default:
+                    throw new IllegalStateException("Unexpected value: " + objectName);
             }
         }
     }
