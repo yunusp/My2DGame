@@ -1,6 +1,7 @@
 package main;
 
 import entity.Player;
+import object.SuperObject;
 import tile.TileManager;
 
 import javax.swing.JPanel;
@@ -36,6 +37,11 @@ public class GamePanel extends JPanel implements Runnable {
 
 
     public Player player = new Player(this, keyH);
+    /**
+     * 10 Objects at the same time on the screen
+     */
+    public SuperObject[] obj = new SuperObject[10];
+    public AssetSetter aSetter = new AssetSetter(this);
 
     public GamePanel() {
         this.setPreferredSize(new Dimension(screenWidth, screenHeight));
@@ -45,7 +51,9 @@ public class GamePanel extends JPanel implements Runnable {
         this.addKeyListener(keyH);
         this.setFocusable(true);
     }
-
+    public void setupGame() {
+        aSetter.setObject();
+    }
     public void startGameThread() {
         gameThread = new Thread(this);
         gameThread.start();
@@ -89,7 +97,16 @@ public class GamePanel extends JPanel implements Runnable {
         super.paintComponent(g);
 
         Graphics2D g2 = (Graphics2D) g;
+        //TILE
         tileM.draw(g2);
+
+        //OBJECT
+        for (SuperObject superObject : obj) {
+            if (superObject != null)
+                superObject.draw(g2, this);
+        }
+
+        //PLAYER
         player.draw(g2);
 
         g2.dispose();
