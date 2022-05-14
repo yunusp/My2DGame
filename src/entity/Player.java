@@ -2,25 +2,21 @@ package entity;
 
 import main.GamePanel;
 import main.KeyHandler;
-import main.UtilityTools;
 
-import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.IOException;
-import java.util.Objects;
 
 public class Player extends Entity {
-    GamePanel gp;
+
     KeyHandler keyH;
 
-    public int hasKey = 0;
+//    public int hasKey = 0;
 
     public final int screenX;
     public final int screenY;
 
     public Player(GamePanel gp, KeyHandler keyH) {
-        this.gp = gp;
+        super(gp);
         this.keyH = keyH;
 
         setDefaultValues();
@@ -45,28 +41,16 @@ public class Player extends Entity {
     }
 
     public void getPlayerImage() {
-        up1 = setup("boy_up_1");
-        up2 = setup("boy_up_2");
-        down1 = setup("boy_down_1");
-        down2 = setup("boy_down_2");
-        right1 = setup("boy_right_1");
-        right2 = setup("boy_right_2");
-        left1 = setup("boy_left_1");
-        left2 = setup("boy_left_2");
+        up1     = setupPackageAgnosticEntity("/player/boy_up_1");
+        up2     = setupPackageAgnosticEntity("/player/boy_up_2");
+        down1   = setupPackageAgnosticEntity("/player/boy_down_1");
+        down2   = setupPackageAgnosticEntity("/player/boy_down_2");
+        right1  = setupPackageAgnosticEntity("/player/boy_right_1");
+        right2  = setupPackageAgnosticEntity("/player/boy_right_2");
+        left1   = setupPackageAgnosticEntity("/player/boy_left_1");
+        left2   = setupPackageAgnosticEntity("/player/boy_left_2");
     }
 
-    private BufferedImage setup(String imageName) {
-        UtilityTools uTool = new UtilityTools();
-        BufferedImage scaledImage;
-        try {
-            scaledImage = ImageIO.read(Objects.requireNonNull(getClass()
-                    .getResourceAsStream("/player/" + imageName + ".png")));
-            scaledImage = uTool.scaleImage(scaledImage, gp.tileSize, gp.tileSize);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        return scaledImage;
-    }
 
     public void update() {
 
@@ -110,26 +94,9 @@ public class Player extends Entity {
     }
 
     public void draw(Graphics2D g2) {
-        BufferedImage image = null;
+        BufferedImage image;
 
-        switch (direction) {
-            case "up" -> {
-                if (spriteNum == 1) image = up1;
-                if (spriteNum == 2) image = up2;
-            }
-            case "down" -> {
-                if (spriteNum == 1) image = down1;
-                if (spriteNum == 2) image = down2;
-            }
-            case "right" -> {
-                if (spriteNum == 1) image = right1;
-                if (spriteNum == 2) image = right2;
-            }
-            case "left" -> {
-                if (spriteNum == 1) image = left1;
-                if (spriteNum == 2) image = left2;
-            }
-        }
+        image = getImageByDirection();
         //move the world around the player, so the player doesn't move
         g2.drawImage(image, screenX, screenY, null);
     }
