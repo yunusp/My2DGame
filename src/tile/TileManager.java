@@ -1,9 +1,11 @@
 package tile;
 
 import main.GamePanel;
+import main.UtilityTools;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -53,20 +55,22 @@ public class TileManager {
     }
 
     public void getTileImage() {
-        setup(0,"grass",false);
-        setup(1,"wall", true);
-        setup(2,"water", true);
-        setup(3,"earth", false);
-        setup(4,"tree", true);
-        setup(5,"sand", false);
+        setup(0, "grass", false);
+        setup(1, "wall", true);
+        setup(2, "water", true);
+        setup(3, "earth", false);
+        setup(4, "tree", true);
+        setup(5, "sand", false);
 
     }
 
     private void setup(int index, String imageName, boolean collision) {
+        UtilityTools uTools = new UtilityTools();
         try {
             tile[index] = new Tile();
             tile[index].image = ImageIO.read(Objects.requireNonNull(getClass()
                     .getResourceAsStream("/tiles/" + imageName + ".png")));
+            tile[index].image = uTools.scaleImage(tile[index].image, gp.tileSize, gp.tileSize);
             tile[index].collision = collision;
         } catch (Exception e) {
             throw new RuntimeException(e);
