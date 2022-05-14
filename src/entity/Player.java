@@ -165,6 +165,6 @@ public class Player extends Entity {
             }
         }
         //move the world around the player, so the player doesn't move
-        g2.drawImage(image, screenX, screenY, gp.tileSize, gp.tileSize, null);
+        g2.drawImage(image, screenX, screenY, null);
     }
 }
