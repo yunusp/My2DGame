@@ -12,6 +12,7 @@ public class CollisionChecker {
     /**
      * Checks if entity is colliding any other tiles
      * marked as collision
+     *
      * @param entity The entity that is colliding
      */
     public void checkTile(Entity entity) {
@@ -129,5 +130,102 @@ public class CollisionChecker {
             }
         }
         return index;
+    }
+
+    public int checkEntity(Entity entity, Entity[] targets) {
+        int index = 999;
+
+        for (int i = 0; i < targets.length; i++) {
+            if (targets[i] != null) {
+                //Get entity solid area pos.
+                entity.solidArea.x = entity.worldX + entity.solidArea.x;
+                entity.solidArea.y = entity.worldY + entity.solidArea.y;
+                //Get object's solid area pos.
+                targets[i].solidArea.x = targets[i].worldX + targets[i].solidArea.x;
+                targets[i].solidArea.y = targets[i].worldY + targets[i].solidArea.y;
+
+                switch (entity.direction) {
+                    case "up" -> {
+                        entity.solidArea.y -= entity.speed;
+                        if (entity.solidArea.intersects(targets[i].solidArea)) {
+                            if (targets[i].collision) entity.collisionOn = true;
+                            index = i;
+                        }
+                    }
+                    case "down" -> {
+                        entity.solidArea.y += entity.speed;
+                        if (entity.solidArea.intersects(targets[i].solidArea)) {
+                            if (targets[i].collision) entity.collisionOn = true;
+                            index = i;
+                        }
+                    }
+                    case "left" -> {
+                        entity.solidArea.x -= entity.speed;
+                        if (entity.solidArea.intersects(targets[i].solidArea)) {
+                            if (targets[i].collision) entity.collisionOn = true;
+                            index = i;
+                        }
+                    }
+                    case "right" -> {
+                        entity.solidArea.x += entity.speed;
+                        if (entity.solidArea.intersects(targets[i].solidArea)) {
+                            if (targets[i].collision) entity.collisionOn = true;
+                            index = i;
+                        }
+                    }
+                    default -> throw new IllegalStateException("Unexpected value: " + entity.direction);
+                }
+                entity.solidArea.x = entity.solidAreaDefaultX;
+                entity.solidArea.y = entity.solidAreaDefaultY;
+                targets[i].solidArea.x = targets[i].solidAreaDefaultX;
+                targets[i].solidArea.y = targets[i].solidAreaDefaultY;
+            }
+        }
+        return index;
+    }
+
+    public void checkPlayer(Entity entity) {
+        //Get entity solid area pos.
+        entity.solidArea.x = entity.worldX + entity.solidArea.x;
+        entity.solidArea.y = entity.worldY + entity.solidArea.y;
+        //Get object's solid area pos.
+        gp.player.solidArea.x = gp.player.worldX + gp.player.solidArea.x;
+        gp.player.solidArea.y = gp.player.worldY + gp.player.solidArea.y;
+
+        switch (entity.direction) {
+            case "up" -> {
+                entity.solidArea.y -= entity.speed;
+                if (entity.solidArea.intersects(gp.player.solidArea)) {
+                    entity.collisionOn = true;
+
+                }
+            }
+            case "down" -> {
+                entity.solidArea.y += entity.speed;
+                if (entity.solidArea.intersects(gp.player.solidArea)) {
+                    entity.collisionOn = true;
+
+                }
+            }
+            case "left" -> {
+                entity.solidArea.x -= entity.speed;
+                if (entity.solidArea.intersects(gp.player.solidArea)) {
+                    entity.collisionOn = true;
+
+                }
+            }
+            case "right" -> {
+                entity.solidArea.x += entity.speed;
+                if (entity.solidArea.intersects(gp.player.solidArea)) {
+                    entity.collisionOn = true;
+
+                }
+            }
+            default -> throw new IllegalStateException("Unexpected value: " + entity.direction);
+        }
+        entity.solidArea.x = entity.solidAreaDefaultX;
+        entity.solidArea.y = entity.solidAreaDefaultY;
+        gp.player.solidArea.x = gp.player.solidAreaDefaultX;
+        gp.player.solidArea.y = gp.player.solidAreaDefaultY;
     }
 }

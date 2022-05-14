@@ -29,6 +29,7 @@ public abstract class Entity {
     public int actionLockCounter = 0;
 
     public int solidAreaDefaultX, solidAreaDefaultY;
+    public boolean collision;
 
     public Entity(GamePanel gp) {
         this.gp = gp;
@@ -60,7 +61,8 @@ public abstract class Entity {
         setAction();
         collisionOn = false;
         gp.cChecker.checkTile(this);
-
+//        gp.cChecker.checkObject(this,false);
+        gp.cChecker.checkPlayer(this);
         //entity may move if not colliding
         if (!collisionOn) {
             switch (direction) {
