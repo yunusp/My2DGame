@@ -37,6 +37,7 @@ public class UI {
         g2.setColor(Color.WHITE);
         if(gp.gameState == GamePanel.playState){
             // TODO: 14-05-2022 Do playState stuff
+            System.out.println("Play State");
         }
         if(gp.gameState == GamePanel.pauseState){
             drawPauseScreen();
@@ -44,6 +45,7 @@ public class UI {
     }
 
     public void drawPauseScreen(){
+        g2.setFont(g2.getFont().deriveFont(Font.PLAIN,80F));
         String text = "Paused";
         int length = (int) g2.getFontMetrics().getStringBounds(text,g2).getWidth();
         int x = getXForCenteredText(text);
