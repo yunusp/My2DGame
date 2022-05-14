@@ -9,6 +9,11 @@ public class CollisionChecker {
         this.gp = gp;
     }
 
+    /**
+     * Checks if entity is colliding any other tiles
+     * marked as collision
+     * @param entity The entity that is colliding
+     */
     public void checkTile(Entity entity) {
         int entityLeftWorldX = entity.worldX + entity.solidArea.x;
         int entityRightWorldX = entity.worldX + entity.solidArea.x + entity.solidArea.width;

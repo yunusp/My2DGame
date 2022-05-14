@@ -26,6 +26,7 @@ public abstract class Entity {
     //default solid area
     public Rectangle solidArea = new Rectangle(0, 0, 48, 40);
     public boolean collisionOn = false;
+    public int actionLockCounter = 0;
 
     public int solidAreaDefaultX, solidAreaDefaultY;
 
@@ -55,6 +56,28 @@ public abstract class Entity {
     }
 
     public void setAction() {}
+    public void update() {
+        setAction();
+        collisionOn = false;
+        gp.cChecker.checkTile(this);
+
+        //entity may move if not colliding
+        if (!collisionOn) {
+            switch (direction) {
+                case "up" -> worldY -= speed;
+                case "down" -> worldY += speed;
+                case "left" -> worldX -= speed;
+                case "right" -> worldX += speed;
+            }
+        }
+
+        spriteCounter++;
+        if (spriteCounter > 12) {
+            if (spriteNum == 1) spriteNum = 2;
+            else if (spriteNum == 2) spriteNum = 1;
+            spriteCounter = 0;
+        }
+    }
 
     public void draw(Graphics2D g2) {
         BufferedImage image;

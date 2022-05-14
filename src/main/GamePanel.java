@@ -27,7 +27,7 @@ public class GamePanel extends JPanel implements Runnable {
     public final int maxWorldRow = 50;
 
     //FPS
-    int FPS = 60;
+    public final int FPS = 60;
 
     //SYSTEM
     TileManager tileM = new TileManager(this);
@@ -61,12 +61,14 @@ public class GamePanel extends JPanel implements Runnable {
         this.addKeyListener(keyH);
         this.setFocusable(true);
     }
+
     public void setupGame() {
         aSetter.setObject();
         aSetter.setNpc();
         playMusic(0);
         gameState = playState;
     }
+
     public void startGameThread() {
         gameThread = new Thread(this);
         gameThread.start();
@@ -93,9 +95,14 @@ public class GamePanel extends JPanel implements Runnable {
     }
 
     public void update() {
-        if(gameState == playState)
+        if (gameState == playState)
             player.update();
-        if(gameState == pauseState){
+        for (Entity e : npc) {
+            if (e != null) {
+                e.update();
+            }
+        }
+        if (gameState == pauseState) {
             System.out.println("In Pause");
             // TODO: 14-05-2022 add handler
         }
@@ -108,7 +115,7 @@ public class GamePanel extends JPanel implements Runnable {
 
         //DEBUG
         long drawStart = 0L;
-        if(keyH.checkDrawTime)
+        if (keyH.checkDrawTime)
             drawStart = System.nanoTime();
         //DEBUG END
 
@@ -122,8 +129,8 @@ public class GamePanel extends JPanel implements Runnable {
         }
 
         //NPCS
-        for(Entity e: npc){
-            if(e!= null){
+        for (Entity e : npc) {
+            if (e != null) {
                 e.draw(g2);
             }
         }
@@ -135,7 +142,7 @@ public class GamePanel extends JPanel implements Runnable {
         ui.draw(g2);
 
         //DEBUG
-        if(keyH.checkDrawTime) {
+        if (keyH.checkDrawTime) {
             long drawEnd;
             drawEnd = System.nanoTime();
             long passedTime = drawEnd - drawStart;
@@ -153,7 +160,8 @@ public class GamePanel extends JPanel implements Runnable {
         music.play();
         music.loop();
     }
-    public void stopMusic(){
+
+    public void stopMusic() {
         music.stop();
     }
 
