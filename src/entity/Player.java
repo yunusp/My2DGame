@@ -105,41 +105,7 @@ public class Player extends Entity {
 
     public void pickUpObject(int i) {
         if (i != 999) {
-            String objectName = gp.obj[i].name;
-
-            switch (objectName) {
-                case "Key":
-                    hasKey++;
-                    gp.playSE(1);
-                    gp.obj[i] = null;
-                    gp.ui.showMessage("You got a key");
-                    break;
-                case "Door":
-                    if (hasKey > 0) {
-                        gp.obj[i] = null;
-                        gp.playSE(3);
-                        hasKey--;
-                        gp.ui.showMessage("You opened a door");
-                    } else {
-                        gp.ui.showMessage("You need a key");
-                    }
-                    break;
-                case "Boots":
-                    if (speed < 7) {
-                        gp.playSE(2);
-                        speed += 2;
-                        gp.ui.showMessage("Speed Up");
-                    }
-                    gp.obj[i] = null;
-                    break;
-                case "Chest":
-                    gp.ui.gameFinished = true;
-                    gp.stopMusic();
-                    gp.playSE(4);
-                    break;
-                default:
-                    throw new IllegalStateException("Unexpected value: " + objectName);
-            }
+            System.out.println("Player.pickUpObject");
         }
     }
 
