@@ -36,12 +36,12 @@ public abstract class Entity {
     }
 
     /**
-     * Returns the Scaled to gp.tileSize image after loading it from imagePath
-     * <p>imagePath must have the full name of the package
-     * <br>e.g. "/player/boy_up_1"</p>
+     * Returns the Scaled to {@code gp.tileSize} image after loading it from {@code imagePath}
+     * <p> {@code imagePath} must have the full name of the package
+     * <br>e.g. {@code "/player/boy_up_1"}</p>
      *
      * @param imagePath name of the image
-     * @return scaledImage: A scaled version of `imagePath`
+     * @return scaledImage: A scaled version of {@code imagePath}
      */
     BufferedImage setupPackageAgnosticEntity(String imagePath) {
         UtilityTools uTool = new UtilityTools();
