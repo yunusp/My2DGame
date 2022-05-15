@@ -17,26 +17,27 @@ public class NPC_OldMan extends Entity {
     }
 
     public void getImage() {
-        up1     =    setupPackageAgnosticEntity("/npc/oldman_up_1");
-        up2     =    setupPackageAgnosticEntity("/npc/oldman_up_2");
-        down1   =    setupPackageAgnosticEntity("/npc/oldman_down_1");
-        down2   =    setupPackageAgnosticEntity("/npc/oldman_down_2");
-        right1  =    setupPackageAgnosticEntity("/npc/oldman_right_1");
-        right2  =    setupPackageAgnosticEntity("/npc/oldman_right_2");
-        left1   =    setupPackageAgnosticEntity("/npc/oldman_left_1");
-        left2   =    setupPackageAgnosticEntity("/npc/oldman_left_2");
+        up1 = setupPackageAgnosticEntity("/npc/oldman_up_1");
+        up2 = setupPackageAgnosticEntity("/npc/oldman_up_2");
+        down1 = setupPackageAgnosticEntity("/npc/oldman_down_1");
+        down2 = setupPackageAgnosticEntity("/npc/oldman_down_2");
+        right1 = setupPackageAgnosticEntity("/npc/oldman_right_1");
+        right2 = setupPackageAgnosticEntity("/npc/oldman_right_2");
+        left1 = setupPackageAgnosticEntity("/npc/oldman_left_1");
+        left2 = setupPackageAgnosticEntity("/npc/oldman_left_2");
     }
 
     public void setDialogue() {
         dialogues[0] = "Hello, GUY!!";
         dialogues[1] = "I am a very very real man!";
         dialogues[2] = "Do not doubt me!";
+        dialogues[3] = "Beware! \nBeware! \nRun away!";
     }
 
     @Override
-    public void setAction(){
+    public void setAction() {
         actionLockCounter++;
-        if(actionLockCounter == gp.FPS * 2) {
+        if (actionLockCounter == gp.FPS * 2) {
             Random random = new Random();
             int i = random.nextInt(100) + 1;
             if (i <= 25) direction = "up";
@@ -49,9 +50,7 @@ public class NPC_OldMan extends Entity {
 
     @Override
     public void speak() {
-        if(dialogues[dialogueIndex] == null) dialogueIndex = 0;
-        gp.ui.currentDialogue = dialogues[dialogueIndex];
-        dialogueIndex++;
+        super.speak();
     }
 
 }

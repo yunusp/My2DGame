@@ -42,14 +42,14 @@ public class Player extends Entity {
     }
 
     public void getPlayerImage() {
-        up1     = setupPackageAgnosticEntity("/player/boy_up_1");
-        up2     = setupPackageAgnosticEntity("/player/boy_up_2");
-        down1   = setupPackageAgnosticEntity("/player/boy_down_1");
-        down2   = setupPackageAgnosticEntity("/player/boy_down_2");
-        right1  = setupPackageAgnosticEntity("/player/boy_right_1");
-        right2  = setupPackageAgnosticEntity("/player/boy_right_2");
-        left1   = setupPackageAgnosticEntity("/player/boy_left_1");
-        left2   = setupPackageAgnosticEntity("/player/boy_left_2");
+        up1 = setupPackageAgnosticEntity("/player/boy_up_1");
+        up2 = setupPackageAgnosticEntity("/player/boy_up_2");
+        down1 = setupPackageAgnosticEntity("/player/boy_down_1");
+        down2 = setupPackageAgnosticEntity("/player/boy_down_2");
+        right1 = setupPackageAgnosticEntity("/player/boy_right_1");
+        right2 = setupPackageAgnosticEntity("/player/boy_right_2");
+        left1 = setupPackageAgnosticEntity("/player/boy_left_1");
+        left2 = setupPackageAgnosticEntity("/player/boy_left_2");
     }
 
 
@@ -92,10 +92,13 @@ public class Player extends Entity {
     }
 
     private void handleNpcInteraction(int i) {
-        if(i != 999){
-            gp.gameState = GamePanel.dialogueState;
-            gp.npc[i].speak();
+        if (i != 999) {
+            if (gp.keyH.enterPressed) {
+                gp.gameState = GamePanel.dialogueState;
+                gp.npc[i].speak();
+            }
         }
+        gp.keyH.enterPressed = false;
     }
 
     public void pickUpObject(int i) {

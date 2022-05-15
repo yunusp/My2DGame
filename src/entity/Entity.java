@@ -121,5 +121,17 @@ public abstract class Entity {
         return image;
     }
 
-    public void speak(){}
+    public void speak(){
+        if (dialogues[dialogueIndex] == null) dialogueIndex = 0;
+        gp.ui.currentDialogue = dialogues[dialogueIndex];
+        dialogueIndex++;
+
+        direction = switch (gp.player.direction) {
+            case "up" -> "down";
+            case "down" -> "up";
+            case "right" -> "left";
+            case "left" -> "right";
+            default -> throw new IllegalStateException("Unexpected value: " + gp.player.direction);
+        };
+    }
 }
