@@ -25,8 +25,6 @@ public class UI {
         arial_40 = new Font("Arial", Font.PLAIN, 40);
         arial_80B = new Font("Arial", Font.BOLD, 80);
 
-//        OBJ_Key key = new OBJ_Key();
-//        keyImage = key.image;
     }
 
     public void showMessage(String msg) {
@@ -60,6 +58,7 @@ public class UI {
 
         x += gp.tileSize;
         y += gp.tileSize;
+        g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 32F));
         g2.drawString(currentDialogue, x, y);
     }
 
@@ -80,7 +79,6 @@ public class UI {
     public void drawPauseScreen() {
         g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 80F));
         String text = "Paused";
-        int length = (int) g2.getFontMetrics().getStringBounds(text, g2).getWidth();
         int x = getXForCenteredText(text);
         int y = gp.screenHeight / 2;
         g2.drawString(text, x, y);

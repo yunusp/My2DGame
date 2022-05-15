@@ -24,21 +24,22 @@ public class KeyHandler implements KeyListener {
     public void keyPressed(KeyEvent e) {
         int code = e.getKeyCode();
 
-        switch (code) {
-            case KeyEvent.VK_W -> upPressed = true;
-            case KeyEvent.VK_A -> leftPressed = true;
-            case KeyEvent.VK_S -> downPressed = true;
-            case KeyEvent.VK_D -> rightPressed = true;
-            case KeyEvent.VK_T -> checkDrawTime = !checkDrawTime;
-
-            case KeyEvent.VK_P -> gp.gameState = switch (gp.gameState) {
-                case GamePanel.playState -> GamePanel.pauseState;
-                case GamePanel.pauseState -> GamePanel.playState;
-
-                default -> throw new IllegalStateException("Unexpected value: " + gp.gameState);
-            };
+        if (gp.gameState == GamePanel.playState) {
+            switch (code) {
+                case KeyEvent.VK_W -> upPressed = true;
+                case KeyEvent.VK_A -> leftPressed = true;
+                case KeyEvent.VK_S -> downPressed = true;
+                case KeyEvent.VK_D -> rightPressed = true;
+                case KeyEvent.VK_T -> checkDrawTime = !checkDrawTime;
+                case KeyEvent.VK_P -> gp.gameState = GamePanel.pauseState;
+            }
         }
-
+        else if(gp.gameState == GamePanel.pauseState){
+            if(code == KeyEvent.VK_P) gp.gameState = GamePanel.playState;
+        }
+        else if(gp.gameState == GamePanel.dialogueState){
+            if(code == KeyEvent.VK_ENTER) gp.gameState = GamePanel.playState;
+        }
     }
 
     @Override
