@@ -4,7 +4,8 @@ import main.GamePanel;
 import main.UtilityTools;
 
 import javax.imageio.ImageIO;
-import java.awt.*;
+import java.awt.Graphics2D;
+import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.Objects;
@@ -27,6 +28,7 @@ public abstract class Entity {
     public Rectangle solidArea = new Rectangle(0, 0, 48, 40);
     public boolean collisionOn = false;
     public int actionLockCounter = 0;
+    String[] dialogues = new String[20];
 
     public int solidAreaDefaultX, solidAreaDefaultY;
     public boolean collision;
@@ -117,4 +119,6 @@ public abstract class Entity {
         }
         return image;
     }
+
+    public void speak(){}
 }

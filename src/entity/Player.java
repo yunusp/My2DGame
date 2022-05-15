@@ -3,7 +3,8 @@ package entity;
 import main.GamePanel;
 import main.KeyHandler;
 
-import java.awt.*;
+import java.awt.Graphics2D;
+import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 
 public class Player extends Entity {
@@ -92,7 +93,8 @@ public class Player extends Entity {
 
     private void handleNpcInteraction(int i) {
         if(i != 999){
-            System.out.println("You hit an NPC");
+            gp.gameState = GamePanel.dialogueState;
+            gp.npc[i].speak();
         }
     }
 

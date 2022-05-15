@@ -34,6 +34,7 @@ public class KeyHandler implements KeyListener {
             case KeyEvent.VK_P -> gp.gameState = switch (gp.gameState) {
                 case GamePanel.playState -> GamePanel.pauseState;
                 case GamePanel.pauseState -> GamePanel.playState;
+
                 default -> throw new IllegalStateException("Unexpected value: " + gp.gameState);
             };
         }

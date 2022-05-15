@@ -11,6 +11,8 @@ public class NPC_OldMan extends Entity {
         direction = "down";
         speed = 1;
         getImage();
+        setDialogue();
+
         collision = true;
     }
 
@@ -25,6 +27,12 @@ public class NPC_OldMan extends Entity {
         left2   =    setupPackageAgnosticEntity("/npc/oldman_left_2");
     }
 
+    public void setDialogue() {
+        dialogues[0] = "Hello, GUY!!";
+        dialogues[1] = "I am a very very real man!";
+        dialogues[2] = "Do not doubt me!";
+    }
+
     @Override
     public void setAction(){
         actionLockCounter++;
@@ -37,6 +45,11 @@ public class NPC_OldMan extends Entity {
             if (i > 75) direction = "right";
             actionLockCounter = 0;
         }
+    }
+
+    @Override
+    public void speak() {
+        gp.ui.currentDialogue = dialogues[0];
     }
 
 }
