@@ -43,6 +43,10 @@ public class UI {
         g2.setFont(maruMonica);
         g2.setColor(Color.WHITE);
 
+        if(gp.gameState == GamePanel.titleState){
+            drawTitleScreen();
+        }
+
         //PAUSED STATE
         if (gp.gameState == GamePanel.pauseState) {
             drawPauseScreen();
@@ -51,6 +55,33 @@ public class UI {
         if (gp.gameState == GamePanel.dialogueState) {
             drawDialogueScreen();
         }
+    }
+
+    private void drawTitleScreen() {
+        g2.setColor(new Color(70,120,80));
+        g2.fillRect(0,0,gp.screenWidth,gp.screenHeight);
+
+        String text = "Game Big Game";
+        g2.setFont(g2.getFont().deriveFont(Font.BOLD, 96));
+        int x = getXForCenteredText(text);
+        int y = gp.tileSize * 3;
+
+        //SHADOW
+        g2.setColor(Color.BLACK);
+        g2.drawString(text, x+5, y+5);
+
+        //TITLE NAME
+        g2.setColor(Color.WHITE);
+        g2.drawString(text, x, y);
+
+        //PLAYER IMAGE
+        x = gp.screenWidth / 2 - (gp.tileSize * 2) / 2; //center him
+        y += gp.tileSize * 2;
+        g2.drawImage(gp.player.down1, x, y,gp.tileSize* 2, gp.tileSize* 2, null);
+
+        //MENU
+        g2.setFont(g2.getFont().deriveFont(Font.BOLD, 48));
+
     }
 
     public void drawDialogueScreen() {
