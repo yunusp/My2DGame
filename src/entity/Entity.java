@@ -31,6 +31,9 @@ public abstract class Entity {
     String[] dialogues = new String[20];
     int dialogueIndex = 0;
 
+    public int maxLife;
+    public int life;
+
     public int solidAreaDefaultX, solidAreaDefaultY;
     public boolean collision;
 
