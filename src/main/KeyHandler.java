@@ -24,6 +24,28 @@ public class KeyHandler implements KeyListener {
     public void keyPressed(KeyEvent e) {
         int code = e.getKeyCode();
 
+        if (gp.gameState == GamePanel.titleState) {
+            switch (code) {
+                case KeyEvent.VK_W -> {
+                    gp.ui.commandNum--;
+                    if (gp.ui.commandNum < 0) gp.ui.commandNum = 2;
+                }
+                case KeyEvent.VK_S -> {
+                    gp.ui.commandNum++;
+                    if (gp.ui.commandNum > 2) gp.ui.commandNum = 0;
+                }
+                case KeyEvent.VK_ENTER -> {
+                    if(gp.ui.commandNum == 0){
+                        gp.gameState = GamePanel.playState;
+                        gp.playMusic(0);
+                    }
+                    if(gp.ui.commandNum == 2){
+                        System.exit(0);
+                    }
+                }
+            }
+        }
+
         if (gp.gameState == GamePanel.playState) {
             switch (code) {
                 case KeyEvent.VK_W -> upPressed = true;
@@ -34,12 +56,10 @@ public class KeyHandler implements KeyListener {
                 case KeyEvent.VK_P -> gp.gameState = GamePanel.pauseState;
                 case KeyEvent.VK_ENTER -> enterPressed = true;
             }
-        }
-        else if(gp.gameState == GamePanel.pauseState){
-            if(code == KeyEvent.VK_P) gp.gameState = GamePanel.playState;
-        }
-        else if(gp.gameState == GamePanel.dialogueState){
-            if(code == KeyEvent.VK_ENTER) gp.gameState = GamePanel.playState;
+        } else if (gp.gameState == GamePanel.pauseState) {
+            if (code == KeyEvent.VK_P) gp.gameState = GamePanel.playState;
+        } else if (gp.gameState == GamePanel.dialogueState) {
+            if (code == KeyEvent.VK_ENTER) gp.gameState = GamePanel.playState;
         }
     }
 
