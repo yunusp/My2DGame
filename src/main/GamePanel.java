@@ -78,7 +78,7 @@ public class GamePanel extends JPanel implements Runnable {
 
     @Override
     public void run() {
-        double drawInterval = 1000000000 / FPS;
+        double drawInterval = 1000000000.0 / FPS;
         double delta = 0;
         long lastTime = System.nanoTime();
         long currentTime;
@@ -164,10 +164,12 @@ public class GamePanel extends JPanel implements Runnable {
         g2.dispose();
     }
 
-    public void playMusic(int i) {
-//        music.setFile(i);
-//        music.play();
-//        music.loop();
+    public void playMusic(int ignoredI) {
+/*
+        music.setFile(i);
+        music.play();
+        music.loop();
+*/
     }
 
     public void stopMusic() {
